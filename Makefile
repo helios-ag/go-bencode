@@ -1,5 +1,5 @@
 coveralls:
-	goveralls -service=travis-ci
+	goveralls -service=github
 
 test:
 	go test -v -race

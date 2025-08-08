@@ -1,0 +1,12 @@
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - staticcheck
+
+issues:
+  # Keep noise low for legacy Go compatibility
+  exclude-use-default: false
+
+
