@@ -92,6 +92,8 @@ func TestUnmarshal(t *testing.T) {
 func BenchmarkUnmarshal(b *testing.B) {
 	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
-		Unmarshal(unmarshalTestData)
+		if _, err := Unmarshal(unmarshalTestData); err != nil {
+			b.Fatal(err)
+		}
 	}
 }
