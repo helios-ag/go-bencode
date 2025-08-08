@@ -25,8 +25,7 @@ type Encoder struct {
 
 //go:nosplit
 func (e *Encoder) grow(neededLength int) {
-	availableLength := e.length - e.offset
-	if availableLength >= neededLength {
+	if e.length-e.offset >= neededLength {
 		return
 	}
 	if e.length == 0 {
@@ -34,11 +33,9 @@ func (e *Encoder) grow(neededLength int) {
 			neededLength = 16
 		}
 		e.length = neededLength
-		availableLength = neededLength
 	} else {
-		for availableLength < neededLength {
+		for e.length-e.offset < neededLength {
 			e.length += e.length
-			availableLength = e.length - e.offset
 		}
 	}
 	buffer := make([]byte, e.length)

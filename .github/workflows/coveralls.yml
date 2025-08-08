@@ -1,0 +1,36 @@
+name: Coveralls
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  coverage:
+    name: Upload coverage to Coveralls
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          cache: true
+
+      - name: Download modules
+        run: go mod download
+
+      - name: Run tests with coverage
+        run: go test -v -race -covermode=atomic -coverprofile=profile.cov ./...
+
+      - name: Upload to Coveralls
+        uses: shogo82148/actions-goveralls@v1
+        with:
+          path-to-profile: profile.cov
+          parallel: false
+          flag-name: Go-stable
+
+

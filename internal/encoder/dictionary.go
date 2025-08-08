@@ -41,7 +41,7 @@ func (e *Encoder) encodeDictionary(data map[string]interface{}) error {
 	} else {
 		keys = make([]string, 0, len(data))
 	}
-	for key, _ := range data {
+	for key := range data {
 		keys = append(keys, key)
 	}
 	sortStrings(keys)
