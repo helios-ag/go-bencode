@@ -1,6 +1,3 @@
-coveralls:
-	goveralls -service=github
-
 test:
 	go test -v -race
 
